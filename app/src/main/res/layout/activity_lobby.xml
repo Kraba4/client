@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_200"
+    tools:context=".LobbyActivity">
+
+    <TextView
+        android:background="@color/borderColor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHeight_percent="0.45"
+        android:scrollbars="vertical"
+        android:textColor="@color/purple_200"
+        android:elegantTextHeight="true"
+        android:padding="30dp"
+        android:id="@+id/chat2"/>
+    <ImageView
+        android:id="@+id/current_game"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/chat2"
+        android:src="@drawable/what"/>
+    <LinearLayout
+
+        android:paddingRight="10dp"
+        android:background="@color/chat"
+        android:id="@+id/chat3"
+        app:layout_constraintTop_toBottomOf="@id/chat2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.1"
+        >
+        <EditText
+            android:layout_weight="5"
+            android:layout_width="0dp"
+            android:paddingLeft="30dp"
+            android:layout_height="match_parent"
+            android:background="@color/chat"
+            android:id="@+id/chat1"
+            android:hint="Написать сообщение"
+
+            >
+
+        </EditText>
+
+        <Button
+            android:onClick="onClickSend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/chat"
+            app:icon="@android:drawable/ic_menu_send"
+            app:iconTint="@color/borderColor" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:id="@+id/head"
+        app:layout_constraintTop_toBottomOf="@id/chat3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nickname"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+
+            android:gravity="center_vertical"
+            android:text="Игрок"
+            android:textSize="20sp">
+        </TextView>
+
+
+            <ImageView
+                android:id="@+id/tictac_image"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:src="@drawable/tictac"
+                >
+            </ImageView>
+
+
+            <ImageView
+                android:id="@+id/chess_image"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:src="@drawable/black_knight"
+                >
+            </ImageView>
+
+
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/head"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHeight_percent="0.25"
+        android:scrollbars="vertical"
+        android:id="@+id/list_players"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/list_players"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <Button
+            style="@android:style/Widget.DeviceDefault.Button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:onClick="onClickBack"
+            android:shadowColor="@color/purple_200"
+            app:icon="@android:drawable/ic_menu_revert"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="@color/borderColor"
+            app:iconTintMode="src_in"
+            app:rippleColor="@color/purple_200" />
+
+        <Button
+            android:id="@+id/play"
+            style="@android:style/Widget.DeviceDefault.Button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:onClick="onClickPlay"
+            android:shadowColor="@color/purple_200"
+            app:icon="@android:drawable/ic_media_play"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="@color/borderColor"
+            app:iconTintMode="src_in"
+            app:rippleColor="@color/purple_200" />
+
+        <Button
+            android:id="@+id/setting"
+            style="@android:style/Widget.DeviceDefault.Button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:onClick="onClickSetting"
+            android:shadowColor="@color/purple_200"
+            app:icon="@android:drawable/ic_menu_preferences"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="@color/borderColor"
+            app:rippleColor="@color/purple_200" />
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,106 @@
+package com.example.games;
+
+import android.animation.ValueAnimator;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.games.command.Chat;
+import com.example.games.command.LookSession;
+
+import java.io.IOException;
+
+public class fafa {
+    public class MainActivity extends AppCompatActivity {
+
+        TicTacView ticTac;
+        EditText login;
+        EditText password;
+        ListView listView;
+        View refresh;
+        public TextView chat;
+        SessionInfoAdapter adapter;
+        EditText message;
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_lobby);
+            Menu.usersMenuView = this;
+            message = findViewById(R.id.chat1);
+            try {
+                Menu.connectToServer("192.168.0.102", 58197);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            chat = findViewById(R.id.chat2);
+            chat.setMovementMethod(new ScrollingMovementMethod());
+            listView = findViewById(R.id.list_players);
+            Menu.usersAdapter = new UserInfoAdapter(this, R.layout.user_item, Menu.users);
+            listView.setAdapter(Menu.usersAdapter);
+
+// activity_main_menu
+//        Menu.sessionsMenuView = this;
+//        try {
+//            Menu.connectToServer("192.168.1.34", 8000);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        refresh = findViewById(R.id.refresh);
+//        listView = findViewById(R.id.sessions);
+//        adapter = new SessionInfoAdapter(this, R.layout.list_item, Menu.sessions);
+//        Menu.sessionsAdapter = adapter;
+//        listView.setAdapter(adapter);
+
+
+//        ticTac = findViewById(R.id.view);
+//        login = findViewById(R.id.login);
+//        password = findViewById(R.id.register);
+        }
+        @RequiresApi(api = Build.VERSION_CODES.O) // activity_login
+        public void onClickLogIn(View view) throws IOException {
+//        if(Menu.socket ==null || !Menu.socket.getKeepAlive()) {
+//            Menu.connectToServer("192.168.1.34", 8000);
+//        }
+//        new Register(login.getText().toString(), password.getText().toString()).send(Menu.out);
+//        new Login(login.getText().toString(), password.getText().toString()).send(Menu.out);
+        }
+        public void goToMain(){
+
+        }
+
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public void onClickRefresh(View view) throws IOException, InterruptedException {
+            new LookSession().send(Menu.out);
+            ValueAnimator animator = ValueAnimator.ofFloat(0, 360);
+            animator.setDuration(500);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    refresh.setRotation((Float) animation.getAnimatedValue());
+                }
+
+            });
+            animator.start();
+        }
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public void onClickSend(View view) throws IOException {
+            String text = message.getText().toString();
+            if(!text.equals("")){
+                new Chat(text).send(Menu.out);
+                message.setText("");
+            }
+        }
+
+    }
+}
