@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void onClickLogIn(View view) throws IOException {
         if(Menu.socket ==null || !Menu.socket.getKeepAlive()) {
-            Menu.connectToServer("81.163.106.108", 58888);
+            Menu.connectToServer("192.168.0.102", 58888); //change ip
         }
         new ThreadLoginSaveSend().execute(login.getText().toString(), password.getText().toString());
     }
